@@ -7,7 +7,7 @@
 <title>The Last Judgement — AI, nuclear warning, and the human beings still in the loop</title>
 <style>
   /* ── Phase overlays ─────────────────────────────────────────── */
-  body.phase-intro, body.phase-video { overflow: hidden; }
+  body.phase-intro { overflow: hidden; }
 
   #intro-overlay {
     position: fixed; inset: 0; z-index: 50;
@@ -16,15 +16,6 @@
     transition: opacity 700ms ease;
   }
   #intro-overlay.out { opacity: 0; pointer-events: none; }
-
-  #video-overlay {
-    position: fixed; inset: 0; z-index: 40;
-    background: #000;
-    opacity: 0; pointer-events: none;
-    transition: opacity 700ms ease;
-  }
-  #video-overlay.active { opacity: 1; pointer-events: auto; }
-  #hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   #essay-wrap { opacity: 0; transition: opacity 1500ms ease; }
   #essay-wrap.visible { opacity: 1; }
@@ -100,44 +91,8 @@
     --selected-blue: #b9d6ff;
   }
   .t-screen { text-align: center; color: var(--text-blue); font-family: "Courier New", Courier, monospace; }
-  .t-line {
-    font-size: clamp(1.8rem, 5vw, 5.5rem);
-    letter-spacing: .03em; line-height: 1.2; white-space: nowrap;
-    text-shadow: 0 0 8px rgba(47,124,255,.55), 0 0 24px rgba(47,124,255,.25);
-  }
-  .t-cursor {
-    display: inline-block; width: .6ch; height: 1em; margin-left: .12em;
-    background: var(--cursor-blue); vertical-align: -.12em;
-    animation: blink .9s steps(1) infinite;
-    box-shadow: 0 0 8px rgba(47,124,255,.85), 0 0 24px rgba(47,124,255,.45);
-  }
-  .t-choices {
-    margin-top: 2.5rem; display: flex; justify-content: center;
-    gap: clamp(2rem,8vw,6rem);
-    opacity: 0; transform: translateY(10px); pointer-events: none;
-    transition: opacity 500ms ease, transform 500ms ease;
-  }
-  .t-choices.visible { opacity: 1; transform: none; pointer-events: auto; }
-  .t-btn {
-    background: none; border: none; color: var(--dim-blue); font: inherit;
-    font-size: clamp(1.2rem,2.2vw,2rem); letter-spacing: .18em; cursor: pointer;
-    padding: .5rem 1rem; text-transform: uppercase;
-    text-shadow: 0 0 6px rgba(47,124,255,.35), 0 0 18px rgba(47,124,255,.15);
-  }
-  .t-btn.sel { color: var(--selected-blue); text-shadow: 0 0 8px rgba(47,124,255,.85), 0 0 28px rgba(47,124,255,.5); }
-  .t-btn.sel::before { content: "> "; }
-  .t-btn.sel::after  { content: " <"; }
-  .t-result {
-    margin-top: 2rem; min-height: 1.5em;
-    color: var(--text-blue); font-size: clamp(1rem,1.5vw,1.4rem);
-    letter-spacing: .12em; opacity: 0; transition: opacity 350ms ease;
-    text-shadow: 0 0 6px rgba(47,124,255,.45), 0 0 18px rgba(47,124,255,.2);
-  }
-  .t-result.visible { opacity: 1; }
-  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
-
   /* password gate (terminal) */
-  #pw-wrap { display: none; margin-top: 2.2rem; }
+  #pw-wrap { display: block; }
   #pw-label { display: block; font-family: "Courier New", Courier, monospace; font-size: clamp(.8rem,1.4vw,1.05rem); letter-spacing: .28em; text-transform: uppercase; color: var(--dim-blue); margin-bottom: 14px; }
   #pw-input {
     background: rgba(47,124,255,.06); border: 1px solid rgba(47,124,255,.4);
@@ -354,28 +309,15 @@
 <div class="prog" id="prog"></div>
 <audio id="score" src="audio/last-warning-light.mp3" loop preload="auto"></audio>
 
-<!-- ═══ PHASE 1: Terminal ══════════════════════════════════════ -->
+<!-- ═══ Password gate ══════════════════════════════════════════ -->
 <div id="intro-overlay">
-  <main class="t-screen" aria-label="Landing page intro">
-    <div class="t-line">
-      <span id="typed"></span><span class="t-cursor" aria-hidden="true"></span>
-    </div>
-    <div id="choices" class="t-choices" aria-label="Begin selection">
-      <button class="t-btn sel" data-choice="yes">Yes</button>
-      <button class="t-btn"     data-choice="no">No</button>
-    </div>
+  <main class="t-screen" aria-label="Password gate">
     <div id="pw-wrap">
       <label id="pw-label" for="pw-input">Enter password</label>
       <input id="pw-input" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Password" />
       <div id="pw-msg"></div>
     </div>
-    <div id="result" class="t-result"></div>
   </main>
-</div>
-
-<!-- ═══ PHASE 2: Video ════════════════════════════════════════ -->
-<div id="video-overlay">
-  <video id="hero-video" src="video/boomshroom-intro.mp4" playsinline></video>
 </div>
 
 <!-- ═══ Watch / Read fork ═════════════════════════════════════ -->
@@ -840,45 +782,23 @@
 
   /* ── Phase elements ─────────────────────────────────────── */
   var introEl  = document.getElementById("intro-overlay");
-  var videoEl  = document.getElementById("video-overlay");
-  var heroVid  = document.getElementById("hero-video");
   var essayEl  = document.getElementById("essay-wrap");
   var score    = document.getElementById("score");
   var prog     = document.getElementById("prog");
 
-  /* ── Terminal state ─────────────────────────────────────── */
-  var text         = "Are you ready to begin?";
-  var typed        = document.getElementById("typed");
-  var choicesEl    = document.getElementById("choices");
-  var resultEl     = document.getElementById("result");
-  var btns         = Array.from(document.querySelectorAll(".t-btn"));
-  var pwWrap       = document.getElementById("pw-wrap");
+  /* ── Password gate ──────────────────────────────────────── */
   var pwInput      = document.getElementById("pw-input");
   var pwMsg        = document.getElementById("pw-msg");
   var PASSWORD     = "comewithmeifyouwanttolive";
-  var selIdx       = 0, choicesActive = false, confirmed = false, started = false;
 
-  function startExperience() {
-    if (started) return;
-    started = true;
-    if (score) { score.volume = 0.4; score.play().catch(function(){}); }
-    typeText();
+  function tryPlayScore() {
+    if (score && score.paused) { score.volume = 0.4; score.play().catch(function(){}); }
   }
+  document.addEventListener("click", tryPlayScore, { once: true });
+  document.addEventListener("keydown", tryPlayScore, { once: true });
+  setTimeout(function() { pwInput.focus(); }, 60);
 
-  var idx = 0;
-  function typeText() {
-    if (idx < text.length) { typed.textContent += text[idx++]; setTimeout(typeText, 70); }
-    else setTimeout(showChoices, 500);
-  }
-
-  function showChoices() { choicesEl.classList.add("visible"); choicesActive = true; }
-
-  function updateSel(n) {
-    selIdx = n;
-    btns.forEach(function(b, i) { b.classList.toggle("sel", i === n); });
-  }
-
-  function goToVideo() {
+  function revealAfterPassword() {
     if (score) {
       var vol = score.volume;
       var fade = setInterval(function() {
@@ -891,13 +811,9 @@
     setTimeout(function() {
       introEl.style.display = "none";
       document.body.classList.remove("phase-intro");
-      document.body.classList.add("phase-video");
-      videoEl.classList.add("active");
-      heroVid.play().catch(function(){});
+      showModeChoice();
     }, 700);
   }
-
-  heroVid.addEventListener("ended", showModeChoice);
 
   // ── Watch / Read fork ───────────────────────────────────────
   var modeChoice = document.getElementById("mode-choice");
@@ -905,40 +821,12 @@
   var mcRead  = document.getElementById("mcRead");
   var essayReady = false;
 
-  function revealEssayBase(cb) {
-    videoEl.style.transition = "opacity 1200ms ease";
-    videoEl.style.opacity = "0";
-    videoEl.style.pointerEvents = "none";
-    setTimeout(function() {
-      videoEl.style.display = "none";
-      document.body.classList.remove("phase-video");
-      essayEl.classList.add("visible");
-      window.scrollTo(0, 0);
-      if (!essayReady) { initEssay(); essayReady = true; }
-      if (cb) cb();
-    }, 1200);
-  }
   function showModeChoice() {
     document.body.classList.add("phase-choice");
-    // reveal the essay (its title-hero) behind the still-black video overlay
     essayEl.classList.add("visible");
     if (!essayReady) { initEssay(); essayReady = true; }
     window.scrollTo(0, 0);
-    // 1) fade the finished video frame to black
-    heroVid.style.transition = "opacity 800ms ease";
-    heroVid.style.opacity = "0";
-    // 2) hold on black, then fade the black overlay away to bloom in the title art
-    setTimeout(function() {
-      videoEl.style.transition = "opacity 1200ms ease";
-      videoEl.style.opacity = "0";
-      videoEl.style.pointerEvents = "none";
-      setTimeout(function() {
-        videoEl.style.display = "none";
-        document.body.classList.remove("phase-video");
-        // 3) present the choice over the dimmed title artwork
-        modeChoice.classList.add("show");
-      }, 1250);
-    }, 950);
+    setTimeout(function() { modeChoice.classList.add("show"); }, 600);
   }
   function dismissChoice() {
     modeChoice.classList.remove("show");
@@ -1067,27 +955,12 @@
     else if (e.key === "Escape") finishFilm();
   });
 
-  function confirm(choice) {
-    if (confirmed) return;
-    confirmed = true;
-    choicesActive = false;                       // stop y/n/arrow handling
-    choicesEl.classList.remove("visible");        // hide the buttons
-    if (choice === "no") {
-      resultEl.textContent = "Sorry to hear that. Goodbye.";
-      resultEl.classList.add("visible");
-      return;
-    }
-    // yes -> reveal the password gate
-    pwWrap.style.display = "block";
-    setTimeout(function () { pwInput.focus(); }, 60);
-  }
-
   function submitPassword() {
     if (pwInput.value === PASSWORD) {
       pwMsg.classList.remove("deny");
       pwMsg.textContent = "Access granted";
       pwInput.disabled = true;
-      setTimeout(goToVideo, 800);
+      setTimeout(revealAfterPassword, 800);
     } else {
       pwMsg.classList.add("deny");
       pwMsg.textContent = "Access denied — try again";
@@ -1096,28 +969,11 @@
     }
   }
   pwInput.addEventListener("keydown", function (e) {
-    e.stopPropagation();                          // keep keys out of the choices handler
+    e.stopPropagation();
     if (e.key === "Enter") { e.preventDefault(); submitPassword(); }
   });
 
-  document.addEventListener("keydown", function(e) {
-    startExperience();
-    if (!choicesActive) return;
-    var k = e.key.toLowerCase();
-    if (k === "y") { updateSel(0); confirm("yes"); }
-    if (k === "n") { updateSel(1); confirm("no"); }
-    if (["arrowleft","arrowup","arrowright","arrowdown"].includes(k)) {
-      e.preventDefault(); updateSel(selIdx === 0 ? 1 : 0);
-    }
-    if (k === "enter") confirm(btns[selIdx].dataset.choice);
-  });
-  document.addEventListener("click", startExperience);
-  btns.forEach(function(b, i) {
-    b.addEventListener("mouseenter", function() { if (choicesActive) updateSel(i); });
-    b.addEventListener("click", function() { if (choicesActive) confirm(b.dataset.choice); });
-  });
-
-  /* ── Essay init (runs after video ends) ─────────────────── */
+  /* ── Essay init (runs after password gate) ────────────────── */
   function initEssay() {
     function upProg() {
       var h = document.documentElement, m = h.scrollHeight - h.clientHeight;
