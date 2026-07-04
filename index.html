@@ -123,6 +123,20 @@
   }
 
   .prog { position:fixed; top:0; left:0; height:3px; background:var(--accent); width:0%; z-index:99; }
+
+  #mute-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    background: rgba(10,10,10,.55); border: 1px solid rgba(255,255,255,.25); border-radius: 50%;
+    color: #f4f1ea; cursor: pointer; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    transition: border-color .2s, background .2s;
+  }
+  #mute-toggle:hover { border-color: var(--accent); background: rgba(10,10,10,.75); }
+  #mute-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #mute-toggle svg { width: 18px; height: 18px; display: block; }
+  #mute-toggle .icon-muted { display: none; }
+  #mute-toggle.muted .icon-on { display: none; }
+  #mute-toggle.muted .icon-muted { display: block; }
   .stack { max-width:680px; margin:0 auto; padding:0 20px 100px; }
   p { margin:0 0 20px; } em { font-style:italic; } strong { font-weight:700; }
   .red { color:var(--accent); } .faint { color:var(--sub); }
@@ -308,6 +322,18 @@
 
 <div class="prog" id="prog"></div>
 <audio id="score" src="audio/last-warning-light.mp3" loop preload="auto"></audio>
+<button id="mute-toggle" aria-label="Mute music" aria-pressed="false">
+  <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="3 9 3 15 8 15 13 20 13 4 8 9 3 9"></polygon>
+    <path d="M16 8.5a5 5 0 0 1 0 7"></path>
+    <path d="M18.5 6a8.5 8.5 0 0 1 0 12"></path>
+  </svg>
+  <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="3 9 3 15 8 15 13 20 13 4 8 9 3 9"></polygon>
+    <line x1="16" y1="9" x2="21" y2="14"></line>
+    <line x1="21" y1="9" x2="16" y2="14"></line>
+  </svg>
+</button>
 
 <!-- ═══ Password gate ══════════════════════════════════════════ -->
 <div id="intro-overlay">
@@ -785,6 +811,16 @@
   var essayEl  = document.getElementById("essay-wrap");
   var score    = document.getElementById("score");
   var prog     = document.getElementById("prog");
+
+  /* ── Music mute toggle ──────────────────────────────────── */
+  var muteBtn = document.getElementById("mute-toggle");
+  function setMusicMuted(m) {
+    score.muted = m;
+    muteBtn.classList.toggle("muted", m);
+    muteBtn.setAttribute("aria-pressed", m ? "true" : "false");
+    muteBtn.setAttribute("aria-label", m ? "Unmute music" : "Mute music");
+  }
+  muteBtn.addEventListener("click", function() { setMusicMuted(!score.muted); });
 
   /* ── Password gate ──────────────────────────────────────── */
   var pwInput      = document.getElementById("pw-input");
