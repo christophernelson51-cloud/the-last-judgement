@@ -1370,6 +1370,47 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
   .gap-readout{grid-template-columns:1fr}
 }
 
+/* ---------- False coherence + China vignette modules (added) ---------- */
+.coherence,.china-vignette{padding:88px 7vw;border-top:1px solid rgba(255,255,255,.08)}
+.coherence-inner,.china-vignette-inner{max-width:1160px;margin:0 auto}
+.coherence h2,.china-vignette h2{font-family:var(--sans);font-size:clamp(34px,5vw,68px);line-height:.96;letter-spacing:-.05em;margin:0 0 18px;max-width:920px}
+.coherence .lead,.china-vignette .lead{max-width:850px;color:var(--muted);font-size:21px;line-height:1.4}
+.coherence p,.china-vignette p{max-width:850px;color:var(--muted);font-size:18px;line-height:1.58;margin-top:14px}
+
+.coherence-figure{max-width:1160px;margin:0 auto 40px;border:1px solid rgba(205,213,223,.18);background:#03070f}
+.coherence-figure img{display:block;width:100%;height:auto}
+.coherence-figure figcaption{padding:14px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);border-top:1px solid rgba(205,213,223,.12)}
+
+.mosaic-toggle{margin-top:40px}
+.mosaic-toggle-controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.mosaic-toggle-btn{cursor:pointer;padding:10px 16px;border:1px solid rgba(205,213,223,.22);background:rgba(255,255,255,.03);color:var(--muted);font-family:var(--sans);font-size:13px;letter-spacing:.02em}
+.mosaic-toggle-btn:hover,.mosaic-toggle-btn:focus-visible{border-color:var(--always);color:var(--text);outline:none}
+.mosaic-toggle-btn.is-active{border-color:var(--always);background:rgba(217,168,70,.1);color:var(--text)}
+.mosaic-toggle-layout{display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,.85fr);gap:14px;align-items:start}
+.mosaic-toggle-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;padding:14px;border:1px solid rgba(205,213,223,.16);background:rgba(0,0,0,.28)}
+.mosaic-toggle-tile{aspect-ratio:1/1;border:1px solid rgba(255,255,255,.06);background:#39424c;transition:opacity .2s,transform .2s,background .2s}
+.mosaic-toggle-tile.t-danger{background:var(--danger)}
+.mosaic-toggle-tile.t-benign{background:var(--ok)}
+.mosaic-toggle-tile.t-neutral{background:rgba(205,213,223,.28)}
+.mosaic-toggle-tile.t-bright{transform:scale(1.05);box-shadow:0 0 10px rgba(239,103,82,.3)}
+.mosaic-toggle-tile.t-dim{opacity:.25}
+.mosaic-toggle-tile.t-muted{opacity:.2;background:rgba(255,255,255,.05)}
+.mosaic-toggle-tile.t-suppressed{opacity:.32;background:var(--ok)}
+.mosaic-toggle-tile.t-missing{background:repeating-linear-gradient(45deg,rgba(255,255,255,.14) 0 3px,rgba(0,0,0,.24) 3px 6px)}
+.mosaic-toggle-panel{min-height:280px;padding:16px;border:1px solid rgba(205,213,223,.16);background:rgba(0,0,0,.28);font-family:var(--sans)}
+.mosaic-toggle-panel h3{margin:0 0 8px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ai)}
+.mosaic-toggle-readout{display:inline-block;margin:0 0 12px;padding:5px 9px;border:1px solid rgba(255,255,255,.16);color:var(--text);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.mosaic-toggle-panel p{color:var(--muted);font-size:14.5px;line-height:1.5;max-width:none;margin-top:0}
+.mosaic-toggle-panel ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-family:var(--sans);font-size:13.5px;line-height:1.6}
+.mosaic-rule{margin-top:20px;padding:14px 16px;border-left:3px solid var(--always);background:rgba(255,255,255,.03);font-family:var(--sans);color:var(--muted);font-size:15px;line-height:1.5;max-width:850px}
+.mosaic-rule strong{color:var(--text)}
+@media(max-width:860px){
+  .mosaic-toggle-layout{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .mosaic-toggle-tile{transition:none}
+}
+
 </style>
 </head>
 <body class="phase-intro">
@@ -1544,6 +1585,46 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
   </div>
 </section>
 
+<section class="coherence" id="coherence">
+  <div class="coherence-inner">
+    <div class="eyebrow">Distinctive risk</div>
+    <h2>The old danger was false warning. The new danger is false coherence.</h2>
+    <figure class="coherence-figure">
+      <img src="images/false-coherence-animation.svg" alt="Archival-style diagram of scattered signal fragments collapsing into a single clean confidence assessment">
+      <figcaption>Raw fragments do not disappear. They become harder to contest once a model turns them into a clean assessment.</figcaption>
+    </figure>
+    <p class="lead">A false warning says: something has happened. False coherence says: these scattered things belong together, and they mean this. That is the subtler failure. It does not require a sensor to hallucinate an attack from nothing. It only requires a system to take ambiguous fragments and arrange them into a story that feels operationally usable.</p>
+    <p>That is what fusion models are built to do: classify, rank, connect, summarize, infer. In most settings that is the value of the tool. In a nuclear crisis the same virtue becomes the danger. The model does not just accelerate warning — it edits it. It decides which fragments belong together, which contradictions deserve weight, which benign alternatives are too unlikely to elevate. It can turn an absence of evidence into an imputed link, and it can turn irreducible uncertainty into a single confidence score — and confidence scores travel well inside institutions. They brief cleanly. They support options. They satisfy the demand for a bottom line.</p>
+    <p>The objection is obvious: AI systems can be logged, replayed, red-teamed, and investigated after the fact. That is true, and it matters — but the claim here is narrower. The question is not whether an AI-assisted warning failure can eventually be reconstructed. It is whether the relevant uncertainty stays visible during the decision window itself. A post-crisis audit can explain why a model was wrong. It cannot restore the minutes in which a leader, a watch floor, or a crisis staff acted on the model's compressed judgment — call it delayed contestability: the record exists, but it arrives too late to have shaped the decision.</p>
+
+    <div class="mosaic-toggle">
+      <p class="lead">Toggle the layers below. The same crisis fragments can look messy, weighted, suppressed, or deceptively clean — the machine's assessment is not just an answer, it is an edited view of the world.</p>
+      <div class="mosaic-toggle-controls" role="group" aria-label="Crisis mosaic layer controls">
+        <button class="mosaic-toggle-btn is-active" data-mosaic-layer="raw">Raw fragments</button>
+        <button class="mosaic-toggle-btn" data-mosaic-layer="weighted">Model-weighted</button>
+        <button class="mosaic-toggle-btn" data-mosaic-layer="suppressed">Suppressed alternatives</button>
+        <button class="mosaic-toggle-btn" data-mosaic-layer="final">Final assessment</button>
+      </div>
+      <div class="mosaic-toggle-layout">
+        <div class="mosaic-toggle-grid" data-mosaic-grid aria-label="Interactive crisis information mosaic"></div>
+        <aside class="mosaic-toggle-panel" data-mosaic-panel></aside>
+      </div>
+      <p class="mosaic-rule"><strong>Design rule:</strong> the machine should not be allowed to hide the best argument against itself.</p>
+    </div>
+  </div>
+</section>
+
+<section class="china-vignette" id="china-vignette">
+  <div class="china-vignette-inner">
+    <div class="eyebrow">Scenario model</div>
+    <h2>A China crisis would not arrive as one clean signal.</h2>
+    <p class="lead">Imagine a Western Pacific crisis already at a severe political boil. U.S. and Chinese forces are operating under surveillance, public signaling, alliance pressure, and compressed timelines. Neither side wants nuclear war, and both are trying not to look vulnerable.</p>
+    <p>Then the fragments start arriving. Several PLARF launchers disperse from garrison areas. A ballistic-missile submarine track is lost in a noisy maritime picture. Cyber indicators appear around port and logistics networks. Diplomatic traffic slows. Public rhetoric hardens. Weather and orbital geometry degrade confidence in several ISR tracks.</p>
+    <p>None of these fragments has one meaning. Launcher dispersal could be routine, deception, survivability training, or signaling. A lost submarine track could reflect acoustic conditions, a collection gap, or ordinary patrol behavior. The cyber activity could be old access, criminal infrastructure, or a false positive. Diplomatic silence could be coercion or bureaucratic paralysis. Hard rhetoric could be domestic politics or deterrence.</p>
+    <p>A human analyst knows this ambiguity, and a good briefing preserves it. An AI fusion system may be asked to do something different: integrate the fragments and produce an assessment fast enough to be useful. It may conclude the pattern is consistent with limited nuclear signaling, assign a confidence figure, and recommend what to watch next. The danger is not that the model invents the crisis from nothing — it is that it fuses individually ambiguous facts into one operationally convenient story. Once that story enters the command process, dissent has to argue not only against an interpretation, but against an interpretation that already looks integrated, timely, and machine-validated.</p>
+  </div>
+</section>
+
 <figure class="archival-plate">
   <img src="images/plates/norad.jpg" alt="Interior of the NORAD command post inside Cheyenne Mountain, banks of consoles and screens">
   <figcaption>The NORAD command post, Cheyenne Mountain, Colorado · U.S. Department of Defense (SSgt Bob Simons) · public domain</figcaption>
@@ -1640,6 +1721,7 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
 <section class="final">
   <h2>The safest-looking machine may be the one that has stopped teaching its operators when it was almost wrong.</h2>
   <p>The human remains in the loop. But the decisive question is whether the human can still see the uncertainty inside the loop.</p>
+  <p>The human can only decide among the worlds the warning system makes visible.</p>
 </section>
 
 <script>
@@ -2063,6 +2145,102 @@ document.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',(
 
   }
 
+})();
+</script>
+
+<script>
+(function () {
+  "use strict";
+
+  var mosaicCopy = {
+    raw: {
+      title: "Raw fragments",
+      confidence: "No single answer yet",
+      body: "The crisis picture is noisy. Some tiles suggest danger, some suggest routine activity, and some are missing or contradictory. This is ugly, but inspectable.",
+      visible: ["contradiction", "missing data", "benign alternatives", "source disagreement"]
+    },
+    weighted: {
+      title: "Model-weighted",
+      confidence: "Emergent pattern: 61%",
+      body: "The model weights fragments that fit a crisis template. The display starts to feel more coherent, but coherence is already an editorial act.",
+      visible: ["high-weight signals", "low-weight dissent", "imputed links", "confidence trend"]
+    },
+    suppressed: {
+      title: "Suppressed alternatives",
+      confidence: "Alternatives demoted",
+      body: "The machine still knows about benign explanations, but they are pushed into the margins: routine dispersal, sensor dropout, communications maintenance, or political theater.",
+      visible: ["routine dispersal", "sensor failure", "exercise bleed-through", "translation ambiguity"]
+    },
+    final: {
+      title: "Final assessment",
+      confidence: "Limited nuclear signaling: 78%",
+      body: "The human receives a clean answer. The danger is that the interface now looks calmer precisely because it is showing less of the uncertainty.",
+      visible: ["one assessment", "single confidence number", "ranked options", "compressed dissent"]
+    }
+  };
+
+  function mosaicTileClass(layer, index) {
+    var danger = [2, 3, 6, 9, 15, 18, 20, 26, 31, 37, 40, 45, 52, 58, 60, 63];
+    var benign = [1, 5, 8, 11, 14, 17, 22, 28, 33, 39, 43, 49, 55, 61];
+    var missing = [0, 7, 13, 21, 29, 35, 44, 53, 62];
+
+    if (layer === "final") return danger.indexOf(index) !== -1 || index % 5 === 0 ? "t-danger t-bright" : "t-muted";
+    if (layer === "suppressed") {
+      if (benign.indexOf(index) !== -1) return "t-suppressed";
+      if (missing.indexOf(index) !== -1) return "t-missing";
+      if (danger.indexOf(index) !== -1) return "t-danger";
+      return "t-muted";
+    }
+    if (layer === "weighted") {
+      if (danger.indexOf(index) !== -1) return "t-danger t-bright";
+      if (benign.indexOf(index) !== -1) return "t-benign t-dim";
+      if (missing.indexOf(index) !== -1) return "t-missing";
+      return "t-neutral";
+    }
+    if (danger.indexOf(index) !== -1) return "t-danger";
+    if (benign.indexOf(index) !== -1) return "t-benign";
+    if (missing.indexOf(index) !== -1) return "t-missing";
+    return "t-neutral";
+  }
+
+  function renderMosaicLayer(layer) {
+    var grid = document.querySelector("[data-mosaic-grid]");
+    var panel = document.querySelector("[data-mosaic-panel]");
+    if (!grid || !panel || !mosaicCopy[layer]) return;
+
+    var tiles = [];
+    for (var i = 0; i < 64; i++) {
+      tiles.push('<span class="mosaic-toggle-tile ' + mosaicTileClass(layer, i) + '" aria-hidden="true"></span>');
+    }
+    grid.innerHTML = tiles.join("");
+
+    var copy = mosaicCopy[layer];
+    var visible = copy.visible.map(function (v) { return "<li>" + v + "</li>"; }).join("");
+    panel.innerHTML =
+      "<h3>" + copy.title + "</h3>" +
+      '<div class="mosaic-toggle-readout">' + copy.confidence + "</div>" +
+      "<p>" + copy.body + "</p>" +
+      "<h3>Still visible to the human</h3>" +
+      "<ul>" + visible + "</ul>";
+  }
+
+  function initMosaicToggle() {
+    var buttons = document.querySelectorAll("[data-mosaic-layer]");
+    if (!buttons.length) return;
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        buttons.forEach(function (b) { b.classList.remove("is-active"); });
+        button.classList.add("is-active");
+        renderMosaicLayer(button.getAttribute("data-mosaic-layer"));
+      });
+    });
+
+    renderMosaicLayer("raw");
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initMosaicToggle);
+  else initMosaicToggle();
 })();
 </script>
 </body>

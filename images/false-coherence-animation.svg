@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">False coherence animation</title>
+  <desc id="desc">An archival-style animated diagram of raw signal fragments collapsing into a clean confidence assessment.</desc>
+  <defs>
+    <filter id="paperNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.11"/>
+      </feComponentTransfer>
+    </filter>
+    <linearGradient id="phosphor" x1="0" x2="1">
+      <stop offset="0" stop-color="#9fc7ff" stop-opacity="0.1"/>
+      <stop offset="0.5" stop-color="#9fc7ff" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#9fc7ff" stop-opacity="0.1"/>
+    </linearGradient>
+    <style>
+      .bg{fill:#03070f}.grid{stroke:#8fb7ff;stroke-opacity:.09;stroke-width:1}.label{font:14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;fill:#b7d2ff;opacity:.72;letter-spacing:.08em}.small{font-size:11px;opacity:.55}.frag{fill:none;stroke:#b7d2ff;stroke-width:2;stroke-opacity:.62}.danger{stroke:#ff8b8b}.benign{stroke:#8ee2b0}.faint{opacity:.25}.box{fill:rgba(5,10,22,.55);stroke:#9fc7ff;stroke-opacity:.22}.dash{stroke-dasharray:5 7}.scan{fill:url(#phosphor);opacity:.0}.confidence{font:700 34px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;fill:#e8f1ff}.cap{font:12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;fill:#b7d2ff;opacity:.66}
+      #rawA{animation:rawPulse 5.8s infinite ease-in-out}#rawB{animation:rawPulse 5.8s infinite ease-in-out .4s}#rawC{animation:rawPulse 5.8s infinite ease-in-out .8s}#rawD{animation:rawPulse 5.8s infinite ease-in-out 1.2s}.lineToModel{stroke-dasharray:900;stroke-dashoffset:900;animation:drawLine 5.8s infinite ease-in-out}.suppressed{animation:suppress 5.8s infinite ease-in-out}.finalBox{animation:finalGlow 5.8s infinite ease-in-out}.scan{animation:scan 5.8s infinite ease-in-out}
+      @keyframes rawPulse{0%,100%{opacity:.34}18%,45%{opacity:1}65%{opacity:.32}}@keyframes drawLine{0%,22%{stroke-dashoffset:900;opacity:.1}45%,76%{stroke-dashoffset:0;opacity:.62}100%{stroke-dashoffset:0;opacity:.12}}@keyframes suppress{0%,42%{opacity:.95}62%,100%{opacity:.18}}@keyframes finalGlow{0%,48%{opacity:.35}67%,88%{opacity:1}100%{opacity:.35}}@keyframes scan{0%,45%{opacity:0;transform:translateX(-500px)}60%{opacity:.45}82%{opacity:.1;transform:translateX(760px)}100%{opacity:0;transform:translateX(760px)}}
+      @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="520"/>
+  <rect width="1200" height="520" filter="url(#paperNoise)" opacity=".6"/>
+  <g>
+    <path class="grid" d="M60 60H1140M60 120H1140M60 180H1140M60 240H1140M60 300H1140M60 360H1140M60 420H1140M60 480H1140"/>
+    <path class="grid" d="M120 40V485M240 40V485M360 40V485M480 40V485M600 40V485M720 40V485M840 40V485M960 40V485M1080 40V485"/>
+  </g>
+  <text x="60" y="36" class="label">RAW FRAGMENTS</text>
+  <text x="476" y="36" class="label">FUSION / WEIGHTING</text>
+  <text x="850" y="36" class="label">FINAL BRIEFING VIEW</text>
+  <g id="rawA">
+    <rect class="box" x="70" y="82" width="260" height="64"/>
+    <text x="88" y="109" class="label">PLARF MOVEMENT</text>
+    <text x="88" y="130" class="label small">routine drill? signaling? deception?</text>
+  </g>
+  <g id="rawB">
+    <rect class="box" x="70" y="172" width="260" height="64"/>
+    <text x="88" y="199" class="label">LOST SUB TRACK</text>
+    <text x="88" y="220" class="label small">acoustic gap? patrol? dispersal?</text>
+  </g>
+  <g id="rawC" class="suppressed">
+    <rect class="box" x="70" y="262" width="260" height="64"/>
+    <text x="88" y="289" class="label">CYBER ANOMALY</text>
+    <text x="88" y="310" class="label small">criminal? preexisting? prep?</text>
+  </g>
+  <g id="rawD" class="suppressed">
+    <rect class="box" x="70" y="352" width="260" height="64"/>
+    <text x="88" y="379" class="label">MISSING ISR</text>
+    <text x="88" y="400" class="label small">weather? geometry? concealment?</text>
+  </g>
+  <path class="frag danger lineToModel" d="M330 114 C430 120, 430 170, 530 185"/>
+  <path class="frag danger lineToModel" d="M330 204 C440 205, 450 195, 530 185"/>
+  <path class="frag benign dash lineToModel suppressed" d="M330 294 C420 285, 465 220, 530 185"/>
+  <path class="frag benign dash lineToModel suppressed" d="M330 384 C440 360, 485 250, 530 185"/>
+  <g>
+    <circle cx="600" cy="220" r="95" fill="none" stroke="#9fc7ff" stroke-opacity=".22"/>
+    <circle cx="600" cy="220" r="58" fill="none" stroke="#9fc7ff" stroke-opacity=".28"/>
+    <path class="frag danger" d="M545 230 C570 145, 640 150, 660 225"/>
+    <path class="frag benign suppressed" d="M542 250 C590 300, 650 285, 668 242"/>
+    <text x="538" y="356" class="label small">BENIGN ALTERNATIVES DEMOTED</text>
+  </g>
+  <path class="frag danger lineToModel" d="M690 220 C755 220, 795 220, 842 220"/>
+  <g class="finalBox">
+    <rect class="box" x="842" y="138" width="290" height="162"/>
+    <text x="866" y="180" class="label">MACHINE ASSESSMENT</text>
+    <text x="866" y="226" class="confidence">78%</text>
+    <text x="954" y="213" class="label">LIMITED</text>
+    <text x="954" y="236" class="label">NUCLEAR SIGNALING</text>
+    <text x="866" y="270" class="cap">suppressed: routine dispersal · sensor dropout</text>
+  </g>
+  <rect class="scan" x="0" y="56" width="440" height="390"/>
+  <text x="60" y="476" class="cap">FALSE COHERENCE: THE WARNING LOOKS CALMER BECAUSE LESS UNCERTAINTY IS VISIBLE.</text>
+</svg>
