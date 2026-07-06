@@ -1342,10 +1342,14 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
 .petrov-copy h3{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:0 0 18px;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.65)}
 .petrov-copy p{font-family:var(--sans);font-size:17px;line-height:1.56;color:rgba(244,241,234,.95);margin:0 0 14px;text-shadow:0 1px 10px rgba(0,0,0,.55)}
 .petrov-log{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,241,234,.5);margin-top:18px;border-top:1px solid rgba(255,255,255,.16);padding-top:14px;display:inline-block}
+.historical-seam{margin:8vh 0 10vh;padding:26px 0 26px 24px;border-left:2px solid rgba(217,168,70,.4)}
+.historical-seam h3{font-family:var(--sans);font-size:clamp(26px,3.4vw,40px);line-height:1.05;letter-spacing:-.04em;margin:0 0 16px;color:var(--text)}
+.historical-seam p{font-family:var(--serif);font-size:19px;line-height:1.5;color:var(--muted);max-width:640px}
 @media(max-width:640px){
   .petrov-trigger{height:240vh}
   .petrov-copy h3{font-size:26px}
   .petrov-copy p{font-size:15px}
+  .historical-seam{padding-left:18px}
 }
 
 /* ---------- detection-vs-decision gap chart ---------- */
@@ -1488,7 +1492,7 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
     <section class="step" data-scene="old"><div class="step-kicker">Step 1 · build the old machine</div><h3>Before AI, the problem was already a tradeoff.</h3><p>A nuclear command system has to move an authentic order from legitimate authority to the weapon. Every link added for safety can also become a link that fails under attack.</p><p class="note">The visual begins as a simple chain. It will mutate one idea at a time.</p></section>
     <section class="step" data-scene="never"><div class="step-kicker">Step 2 · negative control</div><h3>Move toward never, and the system gets safer but more brittle.</h3><p>Control layers are the simple visual shorthand here: locks, codes, vetoes, split custody, and authentication. More layers reduce unauthorized use. They also make the command path longer and more fragile.</p></section>
     <section class="step" data-scene="always"><div class="step-kicker">Step 3 · positive control</div><h3>Move toward always, and the system gets more reliable but more dangerous.</h3><p>Alert postures, predelegation, bypasses, and automation preserve retaliation after disruption. But they create more paths to action when no legitimate order exists.</p></section>
-    <section class="step" data-scene="near"><div class="step-kicker">Step 4 · visible near-miss</div><h3>The old nightmare usually left evidence.</h3><p>A false warning, bad chip, training tape, or broken bomber produced a record: a warning screen, a log entry, an investigation, a human veto. The institution could learn because the error became visible.</p></section>
+    <section class="step" data-scene="near"><div class="step-kicker">Step 4 · visible near-miss</div><h3>The old nightmare usually left evidence.</h3><p>Earlier nuclear near-misses were not safe. They were terrifying precisely because machines, procedures, and institutions produced false or ambiguous warnings. But many of those failures had seams: contradictory sensors, missing confirmation, exercise contamination, physical evidence, or human doubt. The warning could still be argued with inside the decision cycle.</p></section>
 
     <div class="petrov-trigger" id="petrovTrigger">
       <div class="petrov-stage" id="petrovStage">
@@ -1499,9 +1503,16 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
           <h3>Petrov declines to believe the machine.</h3>
           <p>Soviet early warning reported one missile, then five. Doctrine called for immediate escalation. A human officer judged the pattern wrong — and was right.</p>
           <p>Lieutenant Colonel Stanislav Petrov was the duty officer at Serpukhov-15 when the Oko satellites reported the launches. Five missiles made no strategic sense as an opening strike, and ground radar — which could see nothing — agreed. The satellites had mistaken sunlight reflecting off high-altitude clouds for engine flare.</p>
+          <p>Petrov matters not because one man “beat the machine” in a heroic cartoon sense, but because the warning remained contestable. There was a display, a pattern, missing ground-radar confirmation, a strategic context that did not fit, and eventually an error mechanism. The institution could learn because the failure had a shape.</p>
           <div class="petrov-log">EVENT LOG: WARNING DISPLAYED · HUMAN VETO RECORDED · ERROR INVESTIGABLE</div>
         </div>
       </div>
+    </div>
+
+    <div class="historical-seam">
+      <div class="step-kicker">Historical seam · 9 November 1979</div>
+      <h3>A different failure: simulated war bleeding into real warning.</h3>
+      <p>In November 1979, NORAD's warning displays showed what looked like a large-scale Soviet missile attack. The cause was not Soviet missiles — it was exercise data. A training tape simulating an attack had been fed into the live warning system. This was a different failure mode than Petrov's: not a sensor misreading the world, but simulated war contaminating real warning. Satellite and radar cross-checks showed nothing, and the alert stood down within minutes. It still had a seam — a channel that disagreed, a mechanism investigators could name, a fix that could be implemented. That is what a contestable failure looks like.</p>
     </div>
 
     <section class="step" data-scene="gap"><div class="step-kicker">Step 5 · the widening gap</div><h3>Seeing has raced downward for seventy years. Deciding has not.</h3><p>Detection time has collapsed for decades — sensors, fusion, and now AI keep shrinking it. The institutional floor for verifying, deliberating, and authorizing has barely moved, because its limit is human, not computational.</p><p class="note">Drag the year below. Watch the sensor line fall through the decision floor.</p></section>
@@ -1593,9 +1604,9 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
       <img src="images/false-coherence-animation.svg" alt="Archival-style diagram of scattered signal fragments collapsing into a single clean confidence assessment">
       <figcaption>Raw fragments do not disappear. They become harder to contest once a model turns them into a clean assessment.</figcaption>
     </figure>
-    <p class="lead">A false warning says: something has happened. False coherence says: these scattered things belong together, and they mean this. That is the subtler failure. It does not require a sensor to hallucinate an attack from nothing. It only requires a system to take ambiguous fragments and arrange them into a story that feels operationally usable.</p>
+    <p class="lead">A false warning says: something has happened. False coherence says: these scattered things belong together, and they mean this. That is a subtler problem. It does not require a sensor to invent an attack from nothing. It requires a system to take ambiguous fragments and arrange them into a story that feels operationally usable.</p>
     <p>That is what fusion models are built to do: classify, rank, connect, summarize, infer. In most settings that is the value of the tool. In a nuclear crisis the same virtue becomes the danger. The model does not just accelerate warning — it edits it. It decides which fragments belong together, which contradictions deserve weight, which benign alternatives are too unlikely to elevate. It can turn an absence of evidence into an imputed link, and it can turn irreducible uncertainty into a single confidence score — and confidence scores travel well inside institutions. They brief cleanly. They support options. They satisfy the demand for a bottom line.</p>
-    <p>The objection is obvious: AI systems can be logged, replayed, red-teamed, and investigated after the fact. That is true, and it matters — but the claim here is narrower. The question is not whether an AI-assisted warning failure can eventually be reconstructed. It is whether the relevant uncertainty stays visible during the decision window itself. A post-crisis audit can explain why a model was wrong. It cannot restore the minutes in which a leader, a watch floor, or a crisis staff acted on the model's compressed judgment — call it delayed contestability: the record exists, but it arrives too late to have shaped the decision.</p>
+    <p>The objection is obvious: AI systems can be logged, audited, replayed, red-teamed, and investigated after the fact. That is true, and it matters. The claim here is narrower. The question is not whether an AI-assisted warning failure can ever be reconstructed. The question is whether the relevant uncertainty remains visible during the decision window. A post-crisis audit may explain why the model was wrong. It cannot restore the minutes in which a leader, a watch floor, or a crisis staff acted on the model's compressed judgment. Call this delayed contestability: the record may exist, but it arrives too late to have shaped the decision.</p>
 
     <div class="mosaic-toggle">
       <p class="lead">Toggle the layers below. The same crisis fragments can look messy, weighted, suppressed, or deceptively clean — the machine's assessment is not just an answer, it is an edited view of the world.</p>
@@ -1702,12 +1713,9 @@ p{margin:0}p+p{margin-top:1rem}strong{font-weight:700;color:var(--text)}button{f
     <h2>Preserve human-visible uncertainty.</h2>
     <p class="lead">A nuclear AI safety regime should not only preserve human authority over launch. It should preserve the human ability to see doubt, dissent, missing data, and near-misses before the final decision.</p>
     <div class="rules">
-      <div class="rule"><b>Show uncertainty</b><span>Machine assessments should display alternatives, missing data, and assumptions rather than collapsing them into a single clean number.</span></div>
       <div class="rule"><b>Retain dissent</b><span>Discarded model interpretations should remain visible and auditable during crisis review.</span></div>
-      <div class="rule"><b>Keep raw paths</b><span>Commanders need a way to inspect original sensor and intelligence fragments, not only fused products.</span></div>
-      <div class="rule"><b>Log near-misses</b><span>Systems should record when warnings were suppressed, reweighted, or smoothed away.</span></div>
-      <div class="rule"><b>Control updates</b><span>Model changes in NC3-adjacent systems should be logged, tested, red-teamed, and frozen during acute crisis.</span></div>
-      <div class="rule"><b>Design for doubt</b><span>The interface should make uncertainty usable under pressure, not hide it because hiding it feels calmer.</span></div>
+      <div class="rule"><b>Design for doubt</b><span>The interface should make uncertainty usable under pressure, not hide it because hiding it feels calmer. The machine should not be allowed to hide the best argument against itself.</span></div>
+      <div class="rule"><b>Exercise dissent</b><span>If staffs only train to exploit machine speed, they learn obedience by repetition. Nuclear command also needs the practiced ability to slow the room — to refuse, delay, and dissent.</span></div>
     </div>
     <details><summary>Evidence shelf</summary><p>This conceptual model draws on the always/never dilemma in nuclear command and control; the history of PALs, false warnings, Petrov, Goldsboro, Perimeter, and normal accident theory; and recent work on AI, strategic stability, early warning, decision support, automation bias, and nuclear risk. The interface is a conceptual model, not a probability estimate. The policy section treats AI as most dangerous when it enters NC3-adjacent functions before the final launch decision: warning fusion, cyber anomaly detection, target inference, option generation, crisis briefing, and exercise design.</p></details>
   </div>
